@@ -3,462 +3,281 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[ BABAN_OFF ] | Premium Video Production</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&family=Poppins:wght@700;900&family=Bad+Script&display=swap" rel="stylesheet">
+    <title>[ BABAN_OFF ] | Cinematic Video Production</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <style>
         :root {
-            --bg-color: #0F0F0F; /* Глубокий уголь */
-            --accent-orange: #FF8C00; /* Янтарь */
-            --burnt-sienna: #D35400; /* Медь для градиентов */
-            --text-color: #F5F5F5;
-            --text-grey: #A0A0A0;
-            --darker-grey: #1A1A1A;
-            --light-grey: #333;
-            /* Шрифты */
-            --font-main: 'Montserrat', sans-serif;
-            --font-script: 'Bad Script', cursive;
-            --font-numbers: 'Poppins', sans-serif;
+            --bg: #0A0A0A;
+            --orange: #FF8C00;
+            --orange-dark: #CC7000;
+            --text: #FFFFFF;
+            --text-dim: #888888;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 140, 0, 0.2);
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: var(--font-main);
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Montserrat', sans-serif;
             margin: 0;
             overflow-x: hidden;
-            scroll-behavior: smooth;
         }
 
-        /* Премиальный фон: градиенты и плавающие точки */
-        .glow-sphere {
+        /* Задний план */
+        .bg-overlay {
             position: fixed;
-            width: 300px;
-            height: 300px;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 80% 20%, rgba(255, 140, 0, 0.05) 0%, transparent 40%),
+                        radial-gradient(circle at 10% 80%, rgba(255, 140, 0, 0.05) 0%, transparent 40%);
             z-index: -1;
-            filter: blur(120px);
         }
 
-        .sphere-1 { top: -50px; right: -50px; background: radial-gradient(circle, rgba(255, 140, 0, 0.1) 0%, rgba(15, 15, 15, 0) 70%); }
-        .sphere-2 { bottom: -100px; left: -100px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(211, 84, 0, 0.08) 0%, rgba(15, 15, 15, 0) 70%); }
-
-        /* Большое фоновое слово 'CREATIVE' как в Ref 2 */
-        .bg-text {
+        .bg-giant-text {
             position: fixed;
-            font-size: 25vw;
-            font-weight: 900;
-            color: rgba(255, 255, 255, 0.015);
-            text-transform: uppercase;
-            top: 20vh;
-            left: -5vw;
+            font-family: 'Bebas Neue', cursive;
+            font-size: 30vw;
+            color: rgba(255, 255, 255, 0.02);
             z-index: -2;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
             pointer-events: none;
-            letter-spacing: -10px;
+            letter-spacing: 20px;
         }
 
-        /* HEADER */
+        /* Навигация */
         header {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 30px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 100;
-            position: relative;
+            padding: 30px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--accent-orange);
+            font-family: 'Bebas Neue', cursive;
+            font-size: 2rem;
+            letter-spacing: 2px;
+            color: var(--orange);
+        }
+
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            margin-left: 40px;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        nav a:hover { color: var(--orange); }
+
+        .btn-main {
+            border: 1px solid var(--orange);
+            padding: 12px 28px;
+            color: var(--orange);
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.8rem;
             letter-spacing: 1px;
-            text-transform: uppercase;
-            display: flex;
-            align-items: center;
+            transition: 0.4s;
         }
 
-        .logo::before {
-            content: '[ ';
-            color: var(--burnt-sienna);
-            margin-right: 5px;
-        }
-        .logo::after {
-            content: ' ]';
-            color: var(--burnt-sienna);
-            margin-left: 5px;
-        }
-
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 30px;
-            margin: 0;
-            padding: 0;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-color);
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 1.5px;
-            transition: color 0.3s;
-            font-weight: 300;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent-orange);
-        }
-
-        .nav-btn {
-            padding: 12px 25px;
-            border: 1px solid var(--accent-orange);
-            color: var(--accent-orange);
-            text-decoration: none;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            font-size: 0.8rem;
-            transition: all 0.3s;
-        }
-
-        .nav-btn:hover {
-            background: var(--accent-orange);
+        .btn-main:hover {
+            background: var(--orange);
             color: #000;
+            box-shadow: 0 0 25px rgba(255, 140, 0, 0.4);
         }
 
-        /* HERO SECTION */
+        /* Hero секция */
         .hero {
-            max-width: 1300px;
-            margin: 0 auto;
-            padding: 50px 20px 100px 20px;
             display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            gap: 60px;
+            grid-template-columns: 1fr 1fr;
             align-items: center;
-            min-height: 100vh;
-        }
-
-        /* Текстовый блок (Слева) */
-        .hero-text-block {
-            padding-right: 30px;
+            min-height: 80vh;
+            padding: 0 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 50px;
         }
 
         h1 {
-            font-size: clamp(2rem, 6vw, 4rem);
-            font-weight: 900;
-            line-height: 0.95;
-            margin-bottom: 25px;
+            font-family: 'Bebas Neue', cursive;
+            font-size: clamp(4rem, 10vw, 7rem);
+            line-height: 0.85;
+            margin: 0 0 30px 0;
             text-transform: uppercase;
-            position: relative;
         }
 
-        .script-text {
-            font-family: var(--font-script);
-            color: var(--accent-orange);
-            text-transform: none;
-            font-size: 1.1em;
-            letter-spacing: 1px;
-            font-weight: normal;
-        }
-
-        h1::after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 3px;
-            background: var(--burnt-sienna);
-            margin-top: 30px;
-        }
+        .orange-span { color: var(--orange); }
 
         .hero p {
-            max-width: 500px;
-            color: var(--text-grey);
-            margin-bottom: 60px;
-            font-weight: 300;
+            font-size: 1rem;
+            color: var(--text-dim);
             line-height: 1.6;
-            font-size: 1.1rem;
+            max-width: 450px;
+            margin-bottom: 40px;
         }
 
-        .hero-btns {
-            display: flex;
-            gap: 20px;
-        }
-
-        .btn {
-            padding: 18px 40px;
-            border: 2px solid var(--accent-orange);
-            color: var(--accent-orange);
-            text-decoration: none;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 2.5px;
-            transition: all 0.4s ease;
+        /* Визуальный блок плеера */
+        .player-mockup {
             position: relative;
-            font-size: 0.9rem;
-        }
-
-        .btn-fill {
-            background: var(--accent-orange);
-            color: #000;
-            border-color: var(--accent-orange);
-        }
-
-        .btn-fill:hover {
-            background: var(--burnt-sienna);
-            border-color: var(--burnt-sienna);
-            box-shadow: 0 0 40px rgba(211, 84, 0, 0.4);
-        }
-
-        .btn-outline:hover {
-            background: rgba(255, 140, 0, 0.1);
-            color: #FFF;
-        }
-
-        /* Визуальный блок (Справа) */
-        .hero-visual {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* Имитация премиального видеоплеера как в Ref 2 */
-        .video-player {
             width: 100%;
             aspect-ratio: 16/9;
-            background: #1A1A1A;
-            border: 1px solid var(--accent-orange);
+            background: linear-gradient(135deg, #111 0%, #050505 100%);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             overflow: hidden;
-            position: relative;
-            cursor: pointer;
-            box-shadow: 0 0 40px rgba(255, 140, 0, 0.15);
         }
 
-        .player-poster {
-            width: 100%;
-            height: 100%;
-            background: #000;
-            /* Placeholder для изображения, как машина на референсе */
-            background-image: linear-gradient(135deg, #111 25%, transparent 25%), linear-gradient(225deg, #111 25%, transparent 25%), linear-gradient(45deg, #111 25%, transparent 25%), linear-gradient(315deg, #111 25%, transparent 25%);
-            background-size: 40px 40px;
-            opacity: 0.8;
-            transition: opacity 0.4s;
-        }
-
-        .video-player:hover .player-poster {
-            opacity: 1;
-        }
-
-        .player-controls {
+        /* Имитация разметки камеры */
+        .player-mockup::before {
+            content: '';
             position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            top: 20px; left: 20px; right: 20px; bottom: 20px;
+            border: 1px solid rgba(255,255,255,0.05);
+            pointer-events: none;
+        }
+
+        .player-ui {
+            position: absolute;
+            bottom: 15px; left: 20px; right: 20px;
             display: flex;
             justify-content: space-between;
-            align-items: center;
-        }
-
-        .timecode {
-            color: var(--accent-orange);
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
-
-        .player-icons {
-            display: flex;
-            gap: 15px;
-            color: var(--text-grey);
-        }
-
-        /* Блок софта (как в Ref 2) */
-        .software-card {
-            position: absolute;
-            top: 30px;
-            right: 30px;
-            background: rgba(26, 26, 26, 0.7);
-            padding: 10px 20px;
-            border: 1px solid #333;
-            backdrop-filter: blur(8px);
-            font-size: 0.8rem;
+            font-size: 0.6rem;
+            color: var(--orange);
+            font-family: monospace;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #888;
         }
 
-        /* HERO COUNTERS (Внизу Hero блока, как в Ref 2) */
-        .hero-counters {
-            grid-column: 1 / -1;
+        .play-icon {
+            width: 60px; height: 60px;
+            border: 1px solid var(--orange);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .play-icon:hover { transform: scale(1.1); background: rgba(255,140,0,0.1); }
+
+        /* Счетчики внизу */
+        .stats-bar {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
-            background: #1A1A1A;
-            border: 1px solid #333;
+            border-top: 1px solid var(--glass);
+            border-bottom: 1px solid var(--glass);
+            margin-top: 50px;
+            background: var(--glass);
+        }
+
+        .stat-item {
             padding: 40px;
-            margin-top: 80px;
+            text-align: center;
+            border-right: 1px solid var(--glass);
         }
 
-        .counter-item {
-            display: flex;
-            align-items: center;
-            gap: 20px;
+        .stat-num {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 3rem;
+            color: var(--orange);
+            display: block;
         }
 
-        .counter-icon {
-            font-size: 2rem;
-            color: var(--burnt-sienna);
-        }
-
-        .counter-content {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .counter-number {
-            font-size: 2.8rem;
-            font-weight: 900;
-            color: var(--accent-orange);
-            line-height: 1;
-            font-family: var(--font-numbers);
-        }
-
-        .counter-text {
-            color: #888;
-            font-size: 0.8rem;
+        .stat-label {
+            font-size: 0.7rem;
+            color: var(--text-dim);
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             margin-top: 5px;
         }
 
-        /* SOFTWARE LOGOS (В самом низу, как в Ref 2) */
-        .software-logos {
-            grid-column: 1 / -1;
-            padding: 40px 0;
-            display: flex;
-            justify-content: center;
-            gap: 60px;
-            opacity: 0.3;
+        @media (max-width: 900px) {
+            .hero { grid-template-columns: 1fr; text-align: center; padding-top: 50px; }
+            .hero p { margin: 0 auto 40px auto; }
+            .stats-bar { grid-template-columns: 1fr 1fr; }
+            nav, .header-right { display: none; }
         }
-
-        .soft-logo {
-            color: #A0A0A0;
-            font-size: 1rem;
-            font-weight: 300;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        /* Адаптация для мобильных */
-        @media (max-width: 1000px) {
-            .hero {
-                grid-template-columns: 1fr;
-                height: auto;
-                padding-top: 100px;
-                padding-bottom: 50px;
-                text-align: center;
-            }
-            h1::after { margin: 30px auto 0 auto; }
-            .hero p { margin-left: auto; margin-right: auto; }
-            .hero-btns { justify-content: center; }
-            .hero-counters { grid-template-columns: repeat(2, 1fr); padding: 30px; margin-top: 50px;}
-            .software-logos { flex-wrap: wrap; gap: 30px; }
-            .logo { font-size: 1.2rem; }
-            .nav-links, .nav-btn { display: none; }
-        }
-
     </style>
 </head>
 <body>
 
-    <div class="glow-sphere sphere-1"></div>
-    <div class="glow-sphere sphere-2"></div>
-    <div class="bg-text">CREATIVE</div>
+<div class="bg-overlay"></div>
+<div class="bg-giant-text">CREATIVE</div>
 
-    <header data-aos="fade-down" data-aos-duration="1200">
-        <div class="logo">BABAN_OFF</div>
-        <ul class="nav-links">
-            <li><a href="#">Шоурил</a></li>
-            <li><a href="#work">Портфолио</a></li>
-            <li><a href="#">Услуги</a></li>
-            <li><a href="#">Цены</a></li>
-        </ul>
-        <a href="#" class="nav-btn">Связаться</a>
-    </header>
+<header data-aos="fade-down">
+    <div class="logo">BABAN_OFF</div>
+    <nav>
+        <a href="#">Showreel</a>
+        <a href="#">Works</a>
+        <a href="#">Services</a>
+    </nav>
+    <div class="header-right">
+        <a href="#" class="btn-main">Связаться</a>
+    </div>
+</header>
 
-    <main class="hero">
-        <div class="hero-text-block">
-            <h1 data-aos="fade-right" data-aos-duration="1200">
-                МОНТАЖ, КОТОРЫЙ СОЗДАЁТ <br><span class="script-text">Впечатления</span>
-            </h1>
-            <p data-aos="fade-right" data-aos-delay="300" data-aos-duration="1200">
-                Создаю динамичные, эмоциональные и премиальные видео для тех, кто ценит эстетику. Ролики, которые приковывают внимание и работают на ваш имидж.
-            </p>
-            <div class="hero-btns" data-aos="fade-up" data-aos-delay="600" data-aos-duration="1200">
-                <a href="#" class="btn btn-fill">Обсудить проект →</a>
-                <a href="#work" class="btn btn-outline">Смотреть работы</a>
+<main class="hero">
+    <div class="hero-content">
+        <h1 data-aos="fade-right" data-aos-delay="200">
+            High-End <br> <span class="orange-span">Motion</span> Edit
+        </h1>
+        <p data-aos="fade-right" data-aos-delay="400">
+            Создаю дорогой визуальный контент для тех, кому нужен результат, а не просто видео. 5 лет опыта и сотни кейсов в одной ссылке.
+        </p>
+        <div data-aos="fade-right" data-aos-delay="600">
+            <a href="#" class="btn-main" style="background: var(--orange); color: #000; margin-right: 15px;">Обсудить проект</a>
+            <a href="#" class="btn-main">Портфолио</a>
+        </div>
+    </div>
+
+    <div class="hero-visual" data-aos="zoom-in" data-aos-delay="400">
+        <div class="player-mockup">
+            <div class="play-icon">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 10L5 18V2L18 10Z" fill="#FF8C00"/>
+                </svg>
+            </div>
+            <div class="player-ui">
+                <span>REC ● 4K 60FPS</span>
+                <span>00:12:44:03</span>
             </div>
         </div>
-        <div class="hero-visual" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="300">
-            <div class="video-player">
-                <div class="player-poster"></div>
-                <div class="player-controls">
-                    <div class="timecode">00:00:15:22</div>
-                    <div class="player-icons">
-                        <i>[ Adobe ]</i><i>[ Maxon ]</i>
-                    </div>
-                </div>
-            </div>
-            <div class="software-card">Soft Power: PR AE</div>
-        </div>
+    </div>
+</main>
 
-        <div class="hero-counters" data-aos="fade-up" data-aos-delay="1000">
-            <div class="counter-item">
-                <div class="counter-icon">💎</div>
-                <div class="counter-content">
-                    <div class="counter-number">5 лет</div>
-                    <div class="counter-text">опыта в монтаже</div>
-                </div>
-            </div>
-            <div class="counter-item">
-                <div class="counter-icon">⭐</div>
-                <div class="counter-content">
-                    <div class="counter-number">100+</div>
-                    <div class="counter-text">успешных проектов</div>
-                </div>
-            </div>
-            <div class="counter-item">
-                <div class="counter-icon">👑</div>
-                <div class="counter-content">
-                    <div class="counter-number">100%</div>
-                    <div class="counter-text">Премиум Качество</div>
-                </div>
-            </div>
-             <div class="counter-item">
-                <div class="counter-icon">⚡</div>
-                <div class="counter-content">
-                    <div class="counter-number">MAX</div>
-                    <div class="counter-text">Скорость & Точность</div>
-                </div>
-            </div>
-        </div>
+<div class="stats-bar" data-aos="fade-up" data-aos-delay="800">
+    <div class="stat-item">
+        <span class="stat-num">5+</span>
+        <span class="stat-label">Лет опыта</span>
+    </div>
+    <div class="stat-item">
+        <span class="stat-num">150+</span>
+        <span class="stat-label">Проектов</span>
+    </div>
+    <div class="stat-item">
+        <span class="stat-num">Premium</span>
+        <span class="stat-label">Качество</span>
+    </div>
+    <div class="stat-item" style="border: none;">
+        <span class="stat-num">Elite</span>
+        <span class="stat-label">Production</span>
+    </div>
+</div>
 
-        <div class="software-logos" data-aos="fade-up" data-aos-delay="1200">
-            <div class="soft-logo">Adobe Pr</div>
-            <div class="soft-logo">Adobe Ae</div>
-            <div class="soft-logo">CapCut</div>
-            <div class="soft-logo">Maxon C4D</div>
-            <div class="soft-logo">Arri</div>
-            <div class="soft-logo">Blackmagic</div>
-        </div>
-    </main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+    AOS.init({ duration: 1000, once: true });
+</script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script>
-        AOS.init({ once: true });
-    </script>
 </body>
 </html>
