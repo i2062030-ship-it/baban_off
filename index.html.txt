@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Video Production</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <style>
+        :root {
+            --bg-color: #0F0F0F;
+            --accent-orange: #FF8C00;
+            --text-color: #F5F5F5;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* Премиальный градиент на фоне */
+        .glow {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255,140,0,0.15) 0%, rgba(15,15,15,0) 70%);
+            top: -100px;
+            right: -100px;
+            z-index: -1;
+        }
+
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: clamp(3rem, 10vw, 6rem);
+            font-weight: 900;
+            line-height: 0.9;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .orange-text {
+            color: var(--accent-orange);
+            display: block;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            border: 2px solid var(--accent-orange);
+            color: var(--accent-orange);
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.4s ease;
+            margin-top: 30px;
+        }
+
+        .btn:hover {
+            background: var(--accent-orange);
+            color: #000;
+            box-shadow: 0 0 30px rgba(255,140,0,0.5);
+        }
+
+        .section {
+            padding: 100px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .video-card {
+            aspect-ratio: 9/16; /* Для вертикального контента */
+            background: #1A1A1A;
+            border: 1px solid #333;
+            transition: transform 0.5s ease;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .video-card:hover {
+            transform: scale(1.02);
+            border-color: var(--accent-orange);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glow"></div>
+
+    <header>
+        <h1 data-aos="fade-up" data-aos-duration="1000">
+            Design <span class="orange-text">Cinematic</span> Motion
+        </h1>
+        <p data-aos="fade-up" data-aos-delay="300">Премиальный видеомонтаж для тех, кто ценит эстетику.</p>
+        <a href="#work" class="btn" data-aos="zoom-in" data-aos-delay="600">Смотреть работы</a>
+    </header>
+
+    <section class="section" id="work">
+        <h2 data-aos="fade-right">Selected Works</h2>
+        <div class="video-grid">
+            <div class="video-card" data-aos="fade-up"></div>
+            <div class="video-card" data-aos="fade-up" data-aos-delay="200"></div>
+            <div class="video-card" data-aos="fade-up" data-aos-delay="400"></div>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({ once: true });
+    </script>
+</body>
+</html>
