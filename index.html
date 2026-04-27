@@ -3,35 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[ BABAN_OFF ] | Cinematic Gold</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <title>[ BABAN_OFF ] | Premium Production</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;600;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <style>
         :root {
-            --bg: #050505;
+            --bg: #030303;
             --orange: #FF8C00;
-            --orange-glow: rgba(255, 140, 0, 0.6);
-            --glass: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.12);
-            --radius: 25px;
+            --orange-glow: rgba(255, 140, 0, 0.4);
+            --steel-blue: #2F4A63; /* Кинематографичный синий для контраста */
+            --steel-glow: rgba(47, 74, 99, 0.5);
+            --glass-bg: rgba(20, 20, 25, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --radius: 24px;
         }
 
-        * { cursor: none !important; } /* Скрываем дефолтный курсор */
+        * { cursor: none !important; box-sizing: border-box; }
 
         body {
             background-color: var(--bg);
             background-image: 
-                radial-gradient(circle at 50% 50%, rgba(20, 20, 20, 0.5), var(--bg)),
-                url('https://www.transparenttextures.com/patterns/carbon-fibre.png'); /* Та самая текстура */
-            color: #fff;
+                radial-gradient(circle at 15% 50%, var(--steel-glow) 0%, transparent 40%),
+                radial-gradient(circle at 85% 30%, rgba(255, 140, 0, 0.1) 0%, transparent 40%),
+                url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+            color: #F3F4F6;
             font-family: 'Montserrat', sans-serif;
             margin: 0;
-            overflow: hidden;
+            overflow-x: hidden;
         }
 
         /* Кастомный светящийся курсор */
         #cursor {
-            width: 20px; height: 20px;
+            width: 15px; height: 15px;
             background: var(--orange);
             border-radius: 50%;
             position: fixed;
@@ -39,180 +42,131 @@
             z-index: 9999;
             box-shadow: 0 0 20px var(--orange), 0 0 40px var(--orange-glow);
             transition: transform 0.1s ease-out;
+            mix-blend-mode: screen;
         }
 
-        #particles-js {
-            position: fixed; width: 100%; height: 100%; z-index: 1;
-        }
+        #particles-js { position: fixed; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
 
-        /* Header в стиле "Стекло" */
+        /* HEADER */
         header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 25px 6%;
-            position: fixed;
-            width: 88%;
-            z-index: 100;
-            background: rgba(255,255,255,0.02);
-            backdrop-filter: blur(15px);
-            border-bottom: 1px solid var(--glass-border);
-            border-radius: 0 0 var(--radius) var(--radius);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 5%; position: fixed; width: 90%; left: 5%; top: 20px;
+            z-index: 100; background: rgba(10, 10, 12, 0.6);
+            backdrop-filter: blur(20px); border: 1px solid var(--glass-border);
+            border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        .logo {
-            font-family: 'Bebas Neue';
-            font-size: 2.5rem;
-            color: var(--orange);
-            text-decoration: none;
-            text-shadow: 0 0 20px var(--orange-glow);
-        }
+        .logo { font-family: 'Bebas Neue'; font-size: 2.2rem; color: var(--orange); text-decoration: none; letter-spacing: 2px;}
+        nav a { color: #aaa; text-decoration: none; text-transform: uppercase; font-size: 0.75rem; font-weight: 700; margin: 0 20px; transition: 0.3s; }
+        nav a:hover { color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
 
-        nav a {
-            color: #aaa;
-            text-decoration: none;
-            text-transform: uppercase;
-            font-size: 0.7rem;
-            font-weight: 700;
-            margin-left: 35px;
-            letter-spacing: 2px;
-            transition: 0.3s;
-        }
-
-        nav a:hover { color: var(--orange); text-shadow: 0 0 10px var(--orange-glow); }
-
-        /* Hero */
+        /* HERO SECTION */
         .hero {
-            height: 100vh;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            align-items: center;
-            padding: 0 8%;
-            position: relative;
-            z-index: 2;
+            min-height: 100vh; display: grid; grid-template-columns: 1.1fr 0.9fr;
+            align-items: center; padding: 120px 8% 50px 8%; position: relative; z-index: 2;
         }
 
-        h1 {
-            font-family: 'Bebas Neue';
-            font-size: clamp(4rem, 9vw, 7.5rem);
-            line-height: 0.85;
-            margin-bottom: 30px;
-        }
+        h1 { font-family: 'Bebas Neue'; font-size: clamp(4rem, 8vw, 7rem); line-height: 0.85; margin-bottom: 30px; letter-spacing: 1px; }
+        .highlight { color: var(--orange); text-shadow: 0 0 40px var(--orange-glow); }
 
-        .highlight { 
-            color: var(--orange); 
-            text-shadow: 0 0 50px var(--orange-glow);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { text-shadow: 0 0 20px var(--orange-glow); }
-            50% { text-shadow: 0 0 50px var(--orange); }
-            100% { text-shadow: 0 0 20px var(--orange-glow); }
-        }
-
-        .offer-text {
-            font-size: 1.1rem;
-            color: #999;
-            max-width: 500px;
-            line-height: 1.6;
-            margin-bottom: 40px;
-            border-left: 3px solid var(--orange);
-            padding-left: 20px;
-        }
+        .offer-text { font-size: 1.1rem; color: #999; max-width: 480px; line-height: 1.6; margin-bottom: 40px; border-left: 2px solid var(--steel-blue); padding-left: 20px; font-weight: 400; }
 
         /* Кнопки */
         .btn-premium {
-            padding: 20px 45px;
-            font-family: 'Bebas Neue';
-            font-size: 1.5rem;
-            border-radius: var(--radius);
-            text-decoration: none;
-            transition: 0.4s;
-            display: inline-block;
+            padding: 18px 40px; font-family: 'Bebas Neue'; font-size: 1.4rem;
+            border-radius: 12px; text-decoration: none; transition: 0.4s;
+            display: inline-flex; align-items: center; justify-content: center;
         }
+        .btn-solid { background: linear-gradient(135deg, #FF8C00, #E65C00); color: #000; box-shadow: 0 10px 30px var(--orange-glow); border: 1px solid rgba(255,255,255,0.2); }
+        .btn-solid:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(255, 140, 0, 0.6); }
 
-        .btn-solid {
-            background: var(--orange);
-            color: #000;
-            box-shadow: 0 10px 40px var(--orange-glow);
-        }
-
-        .btn-solid:hover { transform: translateY(-5px) scale(1.05); }
-
-        /* Visual Block */
+        /* Visual Frame */
         .main-frame {
-            width: 100%;
-            aspect-ratio: 16/10;
+            width: 100%; aspect-ratio: 16/10;
             background: url('https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?q=80&w=2070&auto=format&fit=crop') center/cover;
-            border-radius: var(--radius);
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 50px 100px rgba(0,0,0,0.9);
+            border-radius: var(--radius); border: 1px solid var(--glass-border);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.8), 0 0 40px var(--steel-glow);
             position: relative;
         }
 
-        /* Софт плашки */
         .soft-badge {
-            position: absolute;
-            width: 80px; height: 80px;
-            border-radius: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 900;
-            font-size: 1.4rem;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-            z-index: 5;
-            animation: float 5s ease-in-out infinite;
+            position: absolute; width: 70px; height: 70px; border-radius: 16px;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 900; font-size: 1.3rem; backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.15); z-index: 5; animation: float 4s ease-in-out infinite;
         }
+        .ae { background: rgba(46, 0, 79, 0.7); color: #cf96fd; top: -25px; right: -25px; box-shadow: 0 10px 30px rgba(147, 51, 234, 0.4); }
+        .pr { background: rgba(0, 30, 54, 0.7); color: #31a8ff; bottom: -25px; left: -25px; animation-delay: 2s; box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4); }
 
-        .ae { background: rgba(46, 0, 79, 0.8); color: #cf96fd; top: -30px; right: -20px; box-shadow: 0 0 30px rgba(147, 51, 234, 0.4); }
-        .pr { background: rgba(0, 30, 54, 0.8); color: #31a8ff; bottom: -20px; left: -30px; box-shadow: 0 0 30px rgba(59, 130, 246, 0.4); animation-delay: 2.5s; }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            50% { transform: translate(-10px, -20px) rotate(5deg); }
+        /* ИСПРАВЛЕННЫЙ LIQUID GLASS BAR */
+        .glass-stats-wrapper {
+            width: 100%; padding: 0 8%; margin-top: -40px; position: relative; z-index: 10;
         }
-
-        /* Жидкое стекло внизу */
         .liquid-glass-bar {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 84%;
-            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
-            backdrop-filter: blur(40px);
-            border: 1px solid var(--glass-border);
-            border-radius: 30px;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            padding: 10px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 0 20px rgba(255,255,255,0.05);
+            background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.01));
+            backdrop-filter: blur(30px); border: 1px solid var(--glass-border);
+            border-radius: var(--radius); display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 0 20px rgba(255,255,255,0.02);
+            overflow: hidden;
+        }
+        .stat-item { text-align: center; padding: 30px 20px; border-right: 1px solid rgba(255,255,255,0.05); }
+        .stat-item:last-child { border-right: none; }
+        .stat-val { font-family: 'Bebas Neue'; font-size: 3rem; color: var(--orange); display: block; line-height: 1; text-shadow: 0 0 15px var(--orange-glow); }
+        .stat-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2px; color: #888; margin-top: 8px; display: block; font-weight: 600; }
+
+        /* СЕКЦИЯ 2: BENTO BOX UI (Стиль Omotive) */
+        .bento-section { padding: 120px 8%; position: relative; z-index: 2; }
+        .section-title { font-family: 'Bebas Neue'; font-size: 4rem; text-align: center; margin-bottom: 60px; letter-spacing: 2px; }
+        
+        .bento-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: auto auto; gap: 25px;
         }
 
-        .stat-item {
-            text-align: center;
-            padding: 25px;
-            border-right: 1px solid rgba(255,255,255,0.05);
+        .bento-card {
+            background: var(--glass-bg); backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border); border-radius: var(--radius);
+            padding: 35px; position: relative; overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            transition: 0.4s;
         }
 
-        .stat-val {
-            font-family: 'Bebas Neue';
-            font-size: 3rem;
-            color: var(--orange);
-            display: block;
-            text-shadow: 0 0 15px var(--orange-glow);
-        }
+        .bento-card:hover { transform: translateY(-5px); border-color: rgba(255, 140, 0, 0.3); }
 
-        .stat-label {
-            font-size: 0.6rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: #666;
+        /* Светящиеся пятна внутри карточек как на референсе */
+        .bento-card::before {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle at 50% 0%, var(--steel-glow), transparent 60%);
+            pointer-events: none; opacity: 0.5; transition: 0.4s;
         }
+        .bento-card.card-orange::before { background: radial-gradient(circle at 50% 0%, var(--orange-glow), transparent 60%); }
+        .bento-card:hover::before { opacity: 0.8; }
 
+        /* Наполнение карточек */
+        .card-large { grid-column: span 2; }
+        .card-icon { width: 40px; height: 40px; background: rgba(255,255,255,0.05); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; font-size: 1.2rem; border: 1px solid rgba(255,255,255,0.1); }
+        .bento-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 15px; color: #fff; }
+        .bento-text { font-size: 0.9rem; color: #aaa; line-height: 1.6; }
+
+        /* Стилизованные элементы внутри плашек */
+        .ui-element { margin-top: 25px; background: rgba(0,0,0,0.4); border-radius: 12px; padding: 15px; border: 1px solid rgba(255,255,255,0.05); }
+        .ui-bar { height: 8px; background: #222; border-radius: 4px; overflow: hidden; margin-top: 10px; }
+        .ui-progress { width: 85%; height: 100%; background: linear-gradient(90deg, var(--orange), #ff4500); box-shadow: 0 0 10px var(--orange-glow); }
+
+        /* Tags */
+        .tag-wrap { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+        .ui-tag { padding: 6px 12px; background: rgba(47, 74, 99, 0.3); border: 1px solid var(--steel-blue); border-radius: 8px; font-size: 0.7rem; font-weight: 700; color: #9cb4cc; text-transform: uppercase; }
+        .ui-tag.active { background: rgba(255, 140, 0, 0.2); border-color: var(--orange); color: var(--orange); }
+
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+
+        @media (max-width: 1024px) {
+            .hero { grid-template-columns: 1fr; text-align: center; padding-top: 150px; }
+            .offer-text { margin: 0 auto 40px auto; border-left: none; border-bottom: 2px solid var(--steel-blue); padding: 0 0 20px 0; }
+            .bento-grid { grid-template-columns: 1fr; }
+            .card-large { grid-column: span 1; }
+        }
     </style>
 </head>
 <body>
@@ -222,12 +176,12 @@
 
 <header data-aos="fade-down">
     <a href="#" class="logo">BABAN_OFF</a>
-    <nav>
+    <nav class="hide-mobile">
         <a href="#">Showreel</a>
-        <a href="#">Projects</a>
-        <a href="#">Contact</a>
+        <a href="#expertise">Экспертиза</a>
+        <a href="#">Контакты</a>
     </nav>
-    <a href="#" class="btn-premium" style="font-size: 1rem; padding: 10px 25px; border: 1px solid var(--orange); color: var(--orange);">Связаться</a>
+    <a href="#" class="btn-premium btn-solid" style="font-size: 1rem; padding: 10px 25px;">Связаться</a>
 </header>
 
 <main class="hero">
@@ -236,9 +190,9 @@
             ВАШ КОНТЕНТ — <br>ЭТО ВАША <span class="highlight">ВАЛЮТА</span>
         </h1>
         <p class="offer-text" data-aos="fade-right" data-aos-delay="200">
-            Создаю визуальное превосходство для тех, кто ценит эстетику. Мой монтаж — это не просто склейка, это инструмент захвата внимания и конверсии в продажи.
+            Создаю визуальное превосходство для тех, кто ценит эстетику. Мой монтаж — это ритм и цвет, которые захватывают внимание и конвертируют зрителя в клиента.
         </p>
-        <div class="btn-group" data-aos="fade-up" data-aos-delay="400">
+        <div data-aos="fade-up" data-aos-delay="400">
             <a href="#" class="btn-premium btn-solid">Обсудить проект</a>
         </div>
     </div>
@@ -251,46 +205,100 @@
     </div>
 </main>
 
-<div class="liquid-glass-bar" data-aos="fade-up" data-aos-delay="800">
-    <div class="stat-item">
-        <span class="stat-val">5 ЛЕТ</span>
-        <span class="stat-label">ОПЫТА В МОНТАЖЕ</span>
-    </div>
-    <div class="stat-item">
-        <span class="stat-val">200+</span>
-        <span class="stat-label">УСПЕШНЫХ КЕЙСОВ</span>
-    </div>
-    <div class="stat-item">
-        <span class="stat-val">100%</span>
-        <span class="stat-label">ПРЕМИУМ КАЧЕСТВО</span>
-    </div>
-    <div class="stat-item" style="border: none;">
-        <span class="stat-val">MAX</span>
-        <span class="stat-label">СКОРОСТЬ И ТОЧНОСТЬ</span>
+<div class="glass-stats-wrapper" data-aos="fade-up" data-aos-delay="700">
+    <div class="liquid-glass-bar">
+        <div class="stat-item">
+            <span class="stat-val">5 ЛЕТ</span>
+            <span class="stat-label">В индустрии</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-val">200+</span>
+            <span class="stat-label">Успешных проектов</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-val">S-LOG3</span>
+            <span class="stat-label">Киношный цвет</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-val">MAX</span>
+            <span class="stat-label">Удержание зрителя</span>
+        </div>
     </div>
 </div>
+
+<section class="bento-section" id="expertise">
+    <h2 class="section-title" data-aos="fade-up">АРСЕНАЛ <span class="highlight">РЕШЕНИЙ</span></h2>
+    
+    <div class="bento-grid">
+        <div class="bento-card card-large card-orange" data-aos="fade-up" data-aos-delay="100">
+            <div class="card-icon">🔥</div>
+            <h3 class="bento-title">Алгоритмическое удержание (Retention)</h3>
+            <p class="bento-text">Я не просто режу кадры. Я анализирую паттерны восприятия. Динамика, саунд-дизайн и визуальные хуки выстраиваются так, чтобы зритель досмотрел ролик до конца. Высокий Retention = дешевый трафик.</p>
+            <div class="ui-element">
+                <div style="display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 700;">
+                    <span>Зрительское внимание</span>
+                    <span style="color: var(--orange);">85%</span>
+                </div>
+                <div class="ui-bar"><div class="ui-progress"></div></div>
+            </div>
+        </div>
+
+        <div class="bento-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="card-icon">🎨</div>
+            <h3 class="bento-title">Cinematic Color Grade</h3>
+            <p class="bento-text">Вытягиваю максимум из исходников. Работаю с логарифмическими профилями (RAW, S-Log). Картинка выглядит дорого, стильно и работает на ваш личный бренд.</p>
+            <div class="tag-wrap">
+                <span class="ui-tag active">S-Log3</span>
+                <span class="ui-tag">Rec.709</span>
+                <span class="ui-tag">10-bit</span>
+            </div>
+        </div>
+
+        <div class="bento-card" data-aos="fade-up" data-aos-delay="300">
+            <div class="card-icon">✨</div>
+            <h3 class="bento-title">Motion Design & VFX</h3>
+            <p class="bento-text">Интеграция сложной 2D/3D графики, инфографики и трекинга прямо в видео. Делаем сложную информацию залипательной.</p>
+            <div class="tag-wrap">
+                <span class="ui-tag active">After Effects</span>
+                <span class="ui-tag">Tracking</span>
+            </div>
+        </div>
+
+        <div class="bento-card card-large" data-aos="fade-up" data-aos-delay="400">
+            <div class="card-icon">⚡</div>
+            <h3 class="bento-title">Премиальный Workflow</h3>
+            <p class="bento-text">Отлаженная система работы. Вы скидываете материал — я выдаю готовый продукт, который можно сразу загружать. Соблюдение дедлайнов без компромиссов в качестве.</p>
+            <div class="ui-element" style="display: flex; align-items: center; gap: 15px;">
+                <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--orange); display: flex; align-items: center; justify-content: center; font-weight: bold; color: #000;">✓</div>
+                <div>
+                    <div style="font-weight: 700; font-size: 0.9rem;">Проект сдан</div>
+                    <div style="font-size: 0.75rem; color: #888;">Точно в срок</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 <script>
-    AOS.init({ duration: 1000, once: true });
+    AOS.init({ duration: 800, once: true });
 
     // Кастомный курсор
     const cursor = document.getElementById('cursor');
     document.addEventListener('mousemove', e => {
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
+        cursor.style.transform = `translate(${e.clientX - 7}px, ${e.clientY - 7}px)`;
     });
 
-    // Частицы поверх текстуры
+    // Частицы
     particlesJS('particles-js', {
         "particles": {
-            "number": { "value": 100, "density": { "enable": true, "value_area": 800 } },
+            "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
             "color": { "value": "#FF8C00" },
-            "opacity": { "value": 0.3, "random": true },
-            "size": { "value": 1.5, "random": true },
+            "opacity": { "value": 0.2, "random": true },
+            "size": { "value": 2, "random": true },
             "line_linked": { "enable": false },
-            "move": { "enable": true, "speed": 1.5, "direction": "none", "random": true, "out_mode": "out" }
+            "move": { "enable": true, "speed": 1, "direction": "top", "random": true, "out_mode": "out" }
         }
     });
 </script>
