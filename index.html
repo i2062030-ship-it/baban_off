@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[ BABAN_OFF ] | Premium Production</title>
+    <title>[ BABAN_OFF ] | Digital Gold</title>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <style>
         :root {
             --bg: #030303;
             --orange: #FF8C00;
-            --orange-glow: rgba(255, 140, 0, 0.4);
+            --orange-glow: rgba(255, 140, 0, 0.5);
             --glass: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.1);
             --text: #FFFFFF;
+            --radius: 20px;
         }
 
         body {
@@ -22,20 +23,17 @@
             font-family: 'Montserrat', sans-serif;
             margin: 0;
             overflow-x: hidden;
-            background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+            background-image: radial-gradient(circle at 50% 50%, #111 0%, #030303 100%);
         }
 
-        /* Огромный текст MOTION на фоне */
-        .bg-text {
+        /* Контейнер для партиклов */
+        #particles-js {
             position: fixed;
-            font-family: 'Bebas Neue';
-            font-size: 35vw;
-            color: rgba(255, 255, 255, 0.015);
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: -1;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            top: 0; left: 0;
             pointer-events: none;
-            letter-spacing: -10px;
         }
 
         header {
@@ -43,9 +41,12 @@
             justify-content: space-between;
             align-items: center;
             padding: 40px 6%;
-            position: absolute;
+            position: fixed;
             width: 88%;
             z-index: 100;
+            backdrop-filter: blur(10px);
+            background: rgba(0,0,0,0.2);
+            border-bottom: 1px solid var(--glass-border);
         }
 
         .logo {
@@ -54,22 +55,23 @@
             color: var(--orange);
             text-decoration: none;
             letter-spacing: 2px;
+            text-shadow: 0 0 15px var(--orange-glow);
         }
 
         .nav-link {
-            color: #888;
+            color: #ccc;
             text-decoration: none;
             text-transform: uppercase;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 700;
-            margin-left: 40px;
+            margin-left: 30px;
             letter-spacing: 2px;
             transition: 0.3s;
         }
 
         .nav-link:hover { color: var(--orange); }
 
-        /* Hero Section */
+        /* Hero */
         .hero {
             height: 100vh;
             display: grid;
@@ -77,196 +79,206 @@
             align-items: center;
             padding: 0 6%;
             position: relative;
-        }
-
-        .hero-content { position: relative; z-index: 2; }
-
-        .pre-title {
-            color: var(--orange);
-            text-transform: uppercase;
-            font-weight: 800;
-            font-size: 0.9rem;
-            letter-spacing: 5px;
-            margin-bottom: 20px;
-            display: block;
+            z-index: 2;
         }
 
         h1 {
             font-family: 'Bebas Neue';
-            font-size: clamp(5rem, 12vw, 9rem);
-            line-height: 0.8;
+            font-size: clamp(4rem, 10vw, 8rem);
+            line-height: 0.85;
             margin: 0 0 30px 0;
             text-transform: uppercase;
         }
 
-        .highlight { color: var(--orange); text-shadow: 0 0 30px var(--orange-glow); }
-
-        .offer-text {
-            font-size: 1.2rem;
-            color: #aaa;
-            max-width: 550px;
-            line-height: 1.5;
-            margin-bottom: 50px;
-            font-weight: 300;
-            border-left: 3px solid var(--orange);
-            padding-left: 25px;
+        .highlight { 
+            color: var(--orange); 
+            text-shadow: 0 0 40px var(--orange-glow); 
+            display: inline-block;
         }
 
-        /* Кнопки */
+        .offer-text {
+            font-size: 1.1rem;
+            color: #888;
+            max-width: 500px;
+            line-height: 1.6;
+            margin-bottom: 50px;
+            font-weight: 400;
+            border-left: 2px solid var(--orange);
+            padding-left: 20px;
+        }
+
         .btn-group { display: flex; gap: 20px; }
 
         .btn-premium {
-            padding: 20px 45px;
+            padding: 18px 40px;
             font-family: 'Bebas Neue';
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 2px;
+            border-radius: var(--radius);
             transition: 0.4s;
-            position: relative;
         }
 
         .btn-solid {
             background: var(--orange);
             color: #000;
-            box-shadow: 0 10px 40px rgba(255, 140, 0, 0.3);
+            box-shadow: 0 10px 30px var(--orange-glow);
         }
 
-        .btn-solid:hover { transform: translateY(-5px); box-shadow: 0 15px 50px var(--orange-glow); }
+        .btn-solid:hover { transform: scale(1.05); box-shadow: 0 15px 40px var(--orange-glow); }
 
-        /* Визуальный блок с "Glass" элементами */
+        /* Иконки Софта */
+        .soft-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+            position: absolute;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .ae { background: #2e004f; color: #cf96fd; top: -40px; right: 20px; }
+        .pr { background: #001e36; color: #31a8ff; bottom: -30px; left: -20px; animation-delay: 2s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
         .hero-visual { position: relative; }
 
         .main-frame {
             width: 100%;
-            aspect-ratio: 16/11;
+            aspect-ratio: 16/10;
             background: url('https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?q=80&w=2070&auto=format&fit=crop') center/cover;
+            border-radius: var(--radius);
             border: 1px solid var(--glass-border);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.7);
             position: relative;
-            box-shadow: 0 50px 100px rgba(0,0,0,0.8);
         }
 
-        /* Плавающие плашки софта */
-        .floating-tag {
+        /* Glass Bar */
+        .stats-glass {
             position: absolute;
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(10px);
+            bottom: 30px;
+            left: 6%;
+            width: 88%;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(25px);
             border: 1px solid var(--glass-border);
-            padding: 12px 20px;
-            font-size: 0.7rem;
-            font-weight: 800;
-            color: var(--orange);
-            text-transform: uppercase;
-            z-index: 5;
-        }
-
-        .tag-1 { top: -20px; right: 40px; }
-        .tag-2 { bottom: 40px; left: -30px; }
-
-        /* Та самая Стеклянная Панель Внизу */
-        .stats-glass-bar {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(30px);
-            border-top: 1px solid var(--glass-border);
+            border-radius: var(--radius);
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             z-index: 10;
         }
 
         .stat-box {
-            padding: 40px 20px;
+            padding: 30px;
             text-align: center;
             border-right: 1px solid var(--glass-border);
-            transition: 0.3s;
         }
-
-        .stat-box:hover { background: rgba(255, 140, 0, 0.05); }
 
         .stat-val {
             font-family: 'Bebas Neue';
-            font-size: 3.5rem;
+            font-size: 3rem;
             color: var(--orange);
-            line-height: 1;
             display: block;
         }
 
         .stat-desc {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             text-transform: uppercase;
             letter-spacing: 2px;
-            color: #777;
-            margin-top: 10px;
-            display: block;
+            color: #666;
+            margin-top: 5px;
         }
 
         @media (max-width: 1100px) {
-            .hero { grid-template-columns: 1fr; height: auto; padding-top: 150px; padding-bottom: 200px;}
-            .stats-glass-bar { grid-template-columns: 1fr 1fr; position: relative; margin-top: 50px;}
-            h1 { font-size: 4rem; }
+            .hero { grid-template-columns: 1fr; padding-top: 120px; text-align: center; height: auto; }
+            .offer-text { margin: 0 auto 40px auto; border-left: none; border-top: 2px solid var(--orange); padding: 20px 0; }
+            .btn-group { justify-content: center; }
+            .stats-glass { grid-template-columns: 1fr 1fr; position: relative; left: 0; width: 100%; margin-top: 50px; }
+            .soft-icon { display: none; }
         }
     </style>
 </head>
 <body>
 
-<div class="bg-text">MOTION</div>
+<div id="particles-js"></div>
 
 <header data-aos="fade-down">
     <a href="#" class="logo">BABAN_OFF</a>
     <nav>
         <a href="#" class="nav-link">Showreel</a>
-        <a href="#" class="nav-link">Works</a>
+        <a href="#" class="nav-link">Portfolio</a>
         <a href="#" class="nav-link">Contact</a>
     </nav>
 </header>
 
 <main class="hero">
     <div class="hero-content">
-        <span class="pre-title" data-aos="fade-up">Premium Video Production</span>
-        <h1 data-aos="fade-up" data-aos-delay="200">
-            ВАШ КОНТЕНТ — <br>ЭТО <span class="highlight">ВАЛЮТА</span>
+        <h1 data-aos="fade-up">
+            ВАШ КОНТЕНТ — <br>ЭТО ВАША <span class="highlight">ВАЛЮТА</span>
         </h1>
-        <p class="offer-text" data-aos="fade-up" data-aos-delay="400">
-            Я не просто монтирую видео. Я создаю визуальное превосходство, которое заставляет вашего зрителя платить вниманием. Высокая ретенция, кинематографичный цвет и монтаж уровня А-листа.
+        <p class="offer-text" data-aos="fade-up" data-aos-delay="200">
+            Я превращаю пиксели в прибыль. Профессиональный Motion-дизайн и монтаж, который удерживает внимание и продает ваш бренд на автопилоте.
         </p>
-        <div class="btn-group" data-aos="fade-up" data-aos-delay="600">
-            <a href="#" class="btn-premium btn-solid">Запросить прайс</a>
-            <a href="#" class="btn-premium" style="border: 1px solid #fff; color: #fff;">Смотреть кейсы</a>
+        <div class="btn-group" data-aos="fade-up" data-aos-delay="400">
+            <a href="#" class="btn-premium btn-solid">Начать проект</a>
+            <a href="#" class="btn-premium" style="border: 1px solid #444; color: #fff;">Работы</a>
         </div>
     </div>
 
     <div class="hero-visual" data-aos="zoom-in" data-aos-delay="400">
-        <div class="floating-tag tag-1">High Retention: 85%</div>
-        <div class="floating-tag tag-2">Color Grade: S-Log3</div>
+        <div class="soft-icon ae">Ae</div>
+        <div class="soft-icon pr">Pr</div>
         <div class="main-frame"></div>
     </div>
 </main>
 
-<div class="stats-glass-bar" data-aos="fade-up" data-aos-delay="800">
+<div class="stats-glass" data-aos="fade-up" data-aos-delay="600">
     <div class="stat-box">
-        <span class="stat-val">5+</span>
-        <span class="stat-desc">Лет в индустрии</span>
+        <span class="stat-val">5 лет</span>
+        <span class="stat-desc">Опыта</span>
     </div>
     <div class="stat-box">
-        <span class="stat-val">200+</span>
-        <span class="stat-desc">Проектов сдано</span>
+        <span class="stat-val">150+</span>
+        <span class="stat-desc">Проектов</span>
     </div>
     <div class="stat-box">
-        <span class="stat-val">TOP</span>
-        <span class="stat-desc">Качество картинки</span>
+        <span class="stat-val">4K</span>
+        <span class="stat-desc">Разрешение</span>
     </div>
     <div class="stat-box" style="border: none;">
-        <span class="stat-val">24/7</span>
-        <span class="stat-desc">Поддержка клиента</span>
+        <span class="stat-val">TOP</span>
+        <span class="stat-desc">Рейтинг</span>
     </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 <script>
     AOS.init({ duration: 1000, once: true });
+
+    /* Настройка партиклов */
+    particlesJS('particles-js', {
+        "particles": {
+            "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+            "color": { "value": "#ffffff" },
+            "opacity": { "value": 0.2, "random": true },
+            "size": { "value": 2, "random": true },
+            "line_linked": { "enable": false },
+            "move": { "enable": true, "speed": 1, "direction": "top", "random": true, "straight": false, "out_mode": "out" }
+        }
+    });
 </script>
 
 </body>
