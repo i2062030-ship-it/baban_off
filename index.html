@@ -3,13 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Video Production</title>
+    <title>Babanov_off | Premium Video Production</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <style>
         :root {
-            --bg-color: #0F0F0F;
-            --accent-orange: #FF8C00;
+            --bg-color: #0F0F0F; /* Глубокий уголь */
+            --accent-orange: #FF8C00; /* Янтарь */
+            --burnt-sienna: #D35400; /* Медь для градиентов */
             --text-color: #F5F5F5;
+            --text-grey: #A0A0A0;
+            --darker-grey: #1A1A1A;
+            --light-grey: #333;
         }
 
         body {
@@ -18,35 +22,111 @@
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             margin: 0;
             overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
-        /* Премиальный градиент на фоне */
-        .glow {
+        /* Премиальный фон: градиенты и плавающие точки */
+        .glow-sphere {
             position: fixed;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(255,140,0,0.15) 0%, rgba(15,15,15,0) 70%);
-            top: -100px;
-            right: -100px;
+            width: 300px;
+            height: 300px;
+            z-index: -1;
+            filter: blur(100px);
+        }
+
+        .sphere-1 { top: -50px; right: -50px; background: radial-gradient(circle, rgba(255, 140, 0, 0.15) 0%, rgba(15, 15, 15, 0) 70%); }
+        .sphere-2 { bottom: -100px; left: -100px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(211, 84, 0, 0.1) 0%, rgba(15, 15, 15, 0) 70%); }
+
+        /* Плавающие оранжевые частицы */
+        .particle {
+            position: fixed;
+            border-radius: 50%;
+            background: rgba(255, 140, 0, 0.3);
+            pointer-events: none;
             z-index: -1;
         }
 
+        @keyframes particle-float {
+            0%, 100% { transform: translateY(0px) translateX(0px); }
+            50% { transform: translateY(-30px) translateX(15px); }
+        }
+
+        /* HEADER */
         header {
-            height: 100vh;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px 20px;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            text-align: center;
-            padding: 20px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-orange);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-orange);
+        }
+
+        .nav-btn {
+            padding: 12px 25px;
+            border: 1px solid var(--accent-orange);
+            color: var(--accent-orange);
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+            transition: all 0.3s;
+        }
+
+        .nav-btn:hover {
+            background: var(--accent-orange);
+            color: #000;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            height: calc(100vh - 120px);
+            display: flex;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 50px;
         }
 
         h1 {
-            font-size: clamp(3rem, 10vw, 6rem);
+            font-size: clamp(2.5rem, 8vw, 5rem);
             font-weight: 900;
-            line-height: 0.9;
-            margin-bottom: 20px;
+            line-height: 0.95;
+            margin-bottom: 25px;
             text-transform: uppercase;
+            position: relative;
         }
 
         .orange-text {
@@ -54,8 +134,30 @@
             display: block;
         }
 
+        h1::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: var(--burnt-sienna);
+            margin-top: 25px;
+        }
+
+        .hero p {
+            max-width: 500px;
+            color: var(--text-grey);
+            margin-bottom: 50px;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 20px;
+        }
+
         .btn {
-            padding: 15px 40px;
+            padding: 18px 40px;
             border: 2px solid var(--accent-orange);
             color: var(--accent-orange);
             text-decoration: none;
@@ -63,57 +165,228 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             transition: all 0.4s ease;
-            margin-top: 30px;
+            position: relative;
+            font-size: 0.9rem;
         }
 
-        .btn:hover {
+        .btn-fill {
             background: var(--accent-orange);
             color: #000;
-            box-shadow: 0 0 30px rgba(255,140,0,0.5);
         }
 
+        .btn-fill:hover {
+            background: var(--burnt-sienna);
+            border-color: var(--burnt-sienna);
+            box-shadow: 0 0 40px rgba(211, 84, 0, 0.5);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 140, 0, 0.1);
+            color: #FFF;
+        }
+
+        /* HERO VISUALS */
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .visual-circle {
+            width: 450px;
+            height: 450px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 140, 0, 0.08);
+            position: relative;
+        }
+
+        .experience-card {
+            position: absolute;
+            bottom: 40px;
+            right: -20px;
+            background: rgba(26, 26, 26, 0.7);
+            padding: 25px;
+            border: 1px solid #333;
+            backdrop-filter: blur(8px);
+        }
+
+        .exp-number {
+            font-size: 4.5rem;
+            font-weight: 900;
+            color: var(--accent-orange);
+            line-height: 1;
+        }
+
+        .exp-text {
+            color: #A0A0A0;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 5px;
+        }
+
+        .projects-count {
+            position: absolute;
+            top: 20%;
+            left: 5%;
+            background: rgba(26, 26, 26, 0.7);
+            padding: 18px;
+            border: 1px solid #333;
+            font-size: 1.1rem;
+            color: var(--accent-orange);
+            font-weight: bold;
+            backdrop-filter: blur(8px);
+        }
+
+        .projects-count span {
+            color: #888;
+            font-weight: normal;
+            font-size: 0.9rem;
+        }
+
+        /* SELECTED WORKS */
         .section {
-            padding: 100px 20px;
+            padding: 120px 20px;
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        .video-grid {
+        .section-header {
+            margin-bottom: 70px;
+        }
+
+        .small-title {
+            color: var(--burnt-sienna);
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            font-size: 3rem;
+            text-transform: uppercase;
+            margin: 0;
+            letter-spacing: 1px;
+        }
+
+        .work-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
         }
 
         .video-card {
             aspect-ratio: 9/16; /* Для вертикального контента */
             background: #1A1A1A;
             border: 1px solid #333;
-            transition: transform 0.5s ease;
-            overflow: hidden;
+            transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
             position: relative;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .video-card::after {
+            content: 'VIEW';
+            position: absolute;
+            font-size: 1rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: #000;
+            background: var(--accent-orange);
+            padding: 10px 20px;
+            opacity: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            top: 0; left: 0;
+            transition: all 0.4s;
         }
 
         .video-card:hover {
-            transform: scale(1.02);
             border-color: var(--accent-orange);
+            transform: translateY(-15px) scale(1.01);
+            box-shadow: 0 20px 60px rgba(255, 140, 0, 0.25);
         }
+
+        .video-card:hover::after {
+            opacity: 0.9;
+        }
+
+        /* Адаптация для мобильных */
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+                height: auto;
+                padding-top: 50px;
+                padding-bottom: 100px;
+                text-align: center;
+            }
+            .nav-links, .nav-btn { display: none; } /* Скроем для простоты на мобильных */
+            .logo { width: 100%; text-align: center; }
+            h1::after { margin: 25px auto 0 auto; }
+            .hero p { margin-left: auto; margin-right: auto; }
+            .hero-btns { justify-content: center; }
+            .visual-circle { width: 300px; height: 300px; margin-top: 50px; }
+            .projects-count, .experience-card { font-size: 0.8rem; padding: 10px; }
+            .exp-number { font-size: 2.5rem; }
+        }
+
     </style>
 </head>
 <body>
 
-    <div class="glow"></div>
+    <div class="glow-sphere sphere-1"></div>
+    <div class="glow-sphere sphere-2"></div>
 
-    <header>
-        <h1 data-aos="fade-up" data-aos-duration="1000">
-            Design <span class="orange-text">Cinematic</span> Motion
-        </h1>
-        <p data-aos="fade-up" data-aos-delay="300">Премиальный видеомонтаж для тех, кто ценит эстетику.</p>
-        <a href="#work" class="btn" data-aos="zoom-in" data-aos-delay="600">Смотреть работы</a>
+    <header data-aos="fade-down" data-aos-duration="1000">
+        <div class="logo">[ Babanov_off ]</div>
+        <ul class="nav-links">
+            <li><a href="#">Showreel</a></li>
+            <li><a href="#work">Projects</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Price</a></li>
+        </ul>
+        <a href="#" class="nav-btn">Обсудить проект</a>
     </header>
 
+    <main class="hero">
+        <div class="hero-text-block">
+            <h1 data-aos="fade-right" data-aos-duration="1000">
+                Design <span class="orange-text">Cinematic</span> Motion
+            </h1>
+            <p data-aos="fade-right" data-aos-delay="300" data-aos-duration="1000">
+                Создаю премиальный видеомонтаж для брендов и блогеров. Ролики, которые приковывают внимание и работают на ваш имидж.
+            </p>
+            <div class="hero-btns" data-aos="fade-up" data-aos-delay="600" data-aos-duration="1000">
+                <a href="#work" class="btn btn-fill">Смотреть работы</a>
+                <a href="#" class="btn btn-outline">Шоурил</a>
+            </div>
+        </div>
+        <div class="hero-visual" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+            <div class="visual-circle"></div>
+            <div class="projects-count" data-aos="zoom-in" data-aos-delay="800">
+                100+<br><span>реализованных проектов</span>
+            </div>
+            <div class="experience-card" data-aos="fade-up" data-aos-delay="1000">
+                <div class="exp-number">5 лет</div>
+                <div class="exp-text">в монтаже</div>
+            </div>
+        </div>
+    </main>
+
     <section class="section" id="work">
-        <h2 data-aos="fade-right">Selected Works</h2>
-        <div class="video-grid">
+        <div class="section-header" data-aos="fade-up">
+            <div class="small-title">Портфолио</div>
+            <h2>Selected Works</h2>
+        </div>
+        <div class="work-grid">
+            <div class="video-card" data-aos="fade-up"></div>
+            <div class="video-card" data-aos="fade-up" data-aos-delay="200"></div>
+            <div class="video-card" data-aos="fade-up" data-aos-delay="400"></div>
             <div class="video-card" data-aos="fade-up"></div>
             <div class="video-card" data-aos="fade-up" data-aos-delay="200"></div>
             <div class="video-card" data-aos="fade-up" data-aos-delay="400"></div>
@@ -123,6 +396,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script>
         AOS.init({ once: true });
+
+        // Добавим плавающие частицы
+        for (let i = 0; i < 20; i++) {
+            let p = document.createElement('div');
+            p.classList.add('particle');
+            p.style.width = Math.random() * 5 + 3 + 'px';
+            p.style.height = p.style.width;
+            p.style.top = Math.random() * 100 + 'vh';
+            p.style.left = Math.random() * 100 + 'vw';
+            p.style.animation = `particle-float ${Math.random() * 10 + 7}s infinite cubic-bezier(0.4, 0, 0.2, 1)`;
+            p.style.animationDelay = `${Math.random() * 5}s`;
+            document.body.appendChild(p);
+        }
     </script>
 </body>
 </html>
