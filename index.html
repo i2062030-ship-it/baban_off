@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[ BABAN_OFF ] | Cinematic Motion</title>
+    <title>[ BABAN_OFF ] | Premium Motion Design</title>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;600;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <style>
@@ -12,7 +12,9 @@
             --orange: #FF8C00;
             --orange-dark: #CC7000;
             --orange-glow: rgba(255, 140, 0, 0.4);
-            --glass-bg: rgba(20, 20, 20, 0.6);
+            --ivory: #F3F4F6;
+            --steel-blue: #2F4A63;
+            --glass-bg: rgba(15, 15, 15, 0.7);
             --glass-border: rgba(255, 140, 0, 0.15);
             --radius: 24px;
         }
@@ -23,15 +25,13 @@
             background-color: var(--bg);
             background-image: 
                 radial-gradient(circle at 15% 50%, rgba(255, 140, 0, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 85% 30%, rgba(255, 140, 0, 0.08) 0%, transparent 40%),
                 url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
-            color: #F3F4F6;
+            color: var(--ivory);
             font-family: 'Montserrat', sans-serif;
             margin: 0;
             overflow-x: hidden;
         }
 
-        /* Кастомный светящийся курсор */
         #cursor {
             width: 15px; height: 15px; background: var(--orange); border-radius: 50%;
             position: fixed; pointer-events: none; z-index: 9999;
@@ -39,352 +39,190 @@
             transition: transform 0.1s ease-out; mix-blend-mode: screen;
         }
 
-        #particles-js { position: fixed; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
-
-        /* HEADER */
         header {
             display: flex; justify-content: space-between; align-items: center;
             padding: 20px 5%; position: fixed; width: 90%; left: 5%; top: 20px;
             z-index: 100; background: rgba(10, 10, 10, 0.7);
             backdrop-filter: blur(20px); border: 1px solid var(--glass-border);
-            border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            border-radius: 20px;
         }
 
-        .logo { font-family: 'Bebas Neue'; font-size: 2.2rem; color: var(--orange); text-decoration: none; letter-spacing: 2px; text-shadow: 0 0 15px var(--orange-glow);}
-        nav a { color: #aaa; text-decoration: none; text-transform: uppercase; font-size: 0.75rem; font-weight: 700; margin: 0 20px; transition: 0.3s; }
-        nav a:hover { color: var(--orange); text-shadow: 0 0 10px var(--orange-glow); }
+        .logo { font-family: 'Bebas Neue'; font-size: 2.2rem; color: var(--orange); text-decoration: none; letter-spacing: 2px; }
 
-        /* HERO SECTION */
+        /* HERO */
         .hero {
             min-height: 100vh; display: grid; grid-template-columns: 1.1fr 0.9fr;
-            align-items: center; padding: 120px 8% 50px 8%; position: relative; z-index: 2;
+            align-items: center; padding: 120px 8% 50px 8%; position: relative;
         }
 
-        h1 { font-family: 'Bebas Neue'; font-size: clamp(4rem, 8vw, 7rem); line-height: 0.85; margin-bottom: 30px; letter-spacing: 1px; }
-        .highlight { color: var(--orange); text-shadow: 0 0 40px var(--orange-glow); }
-        .offer-text { font-size: 1.1rem; color: #999; max-width: 480px; line-height: 1.6; margin-bottom: 40px; border-left: 2px solid var(--orange); padding-left: 20px; font-weight: 400; }
+        h1 { font-family: 'Bebas Neue'; font-size: clamp(4rem, 8vw, 7rem); line-height: 0.85; margin-bottom: 30px; }
+        .highlight { color: var(--orange); text-shadow: 0 0 30px var(--orange-glow); }
 
-        /* Кнопки */
         .btn-premium {
             padding: 18px 40px; font-family: 'Bebas Neue'; font-size: 1.4rem;
             border-radius: 12px; text-decoration: none; transition: 0.4s;
-            display: inline-flex; align-items: center; justify-content: center;
+            display: inline-flex; align-items: center; background: linear-gradient(135deg, #FF8C00, #CC7000); color: #000;
         }
-        .btn-solid { background: linear-gradient(135deg, #FF8C00, #CC7000); color: #000; box-shadow: 0 10px 30px var(--orange-glow); border: 1px solid rgba(255,255,255,0.2); }
-        .btn-solid:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(255, 140, 0, 0.7); }
 
-        /* ВИДЕО ФРЕЙМ И 3D ЭЛЕМЕНТ */
-        .main-frame {
-            width: 100%; aspect-ratio: 16/10; border-radius: var(--radius); 
-            border: 1px solid var(--glass-border); position: relative; overflow: hidden;
-            box-shadow: 0 40px 80px rgba(0,0,0,0.9), 0 0 40px var(--orange-glow);
-        }
-        
-        .hero-video { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; }
-
-        /* Имитация 3D модели (Потом заменишь на Spline/ThreeJS) */
-        .model-3d-placeholder {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 150px; height: 150px; transform-style: preserve-3d;
-            animation: spin3D 10s linear infinite; z-index: 5; pointer-events: none;
-        }
-        .cube-face {
-            position: absolute; width: 100%; height: 100%;
-            border: 2px solid var(--orange); background: rgba(255, 140, 0, 0.1);
-            box-shadow: 0 0 20px var(--orange-glow), inset 0 0 20px var(--orange-glow);
-            display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue'; font-size: 2rem; color: var(--orange);
-        }
-        .front  { transform: rotateY(  0deg) translateZ(75px); }
-        .back   { transform: rotateY(180deg) translateZ(75px); }
-        .right  { transform: rotateY( 90deg) translateZ(75px); }
-        .left   { transform: rotateY(-90deg) translateZ(75px); }
-        .top    { transform: rotateX( 90deg) translateZ(75px); }
-        .bottom { transform: rotateX(-90deg) translateZ(75px); }
-
-        @keyframes spin3D { 0% { transform: translate(-50%, -50%) rotateX(0deg) rotateY(0deg); } 100% { transform: translate(-50%, -50%) rotateX(360deg) rotateY(360deg); } }
-
-        /* Софт плашки */
-        .soft-badge {
-            position: absolute; width: 70px; height: 70px; border-radius: 16px;
-            display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.3rem;
-            backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.15); z-index: 10; animation: float 4s ease-in-out infinite;
-        }
-        .ae { background: rgba(46, 0, 79, 0.8); color: #cf96fd; top: 20px; right: 20px; box-shadow: 0 10px 30px rgba(147, 51, 234, 0.4); }
-        .pr { background: rgba(0, 30, 54, 0.8); color: #31a8ff; bottom: 20px; left: 20px; animation-delay: 2s; box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4); }
-
-        /* БЕГУЩАЯ СТРОКА (TICKER) */
+        /* БЕГУЩАЯ СТРОКА - ИСПРАВЛЕННАЯ БЕСКОНЕЧНОСТЬ */
         .ticker-wrapper {
-            width: 100%; background: #0a0a0a; border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border);
-            padding: 15px 0; overflow: hidden; position: relative; z-index: 10; box-shadow: 0 0 30px rgba(0,0,0,0.8);
+            width: 100%; background: #000; border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border);
+            padding: 20px 0; overflow: hidden; position: relative; display: flex;
         }
         .ticker-track {
-            display: flex; width: max-content; animation: scrollTicker 20s linear infinite;
+            display: flex; white-space: nowrap; animation: scrollTicker 30s linear infinite;
         }
         .ticker-item {
-            font-family: 'Bebas Neue'; font-size: 1.5rem; color: #fff; letter-spacing: 2px;
-            display: flex; align-items: center; padding: 0 30px; text-transform: uppercase;
+            font-family: 'Bebas Neue'; font-size: 1.8rem; color: #fff;
+            display: flex; align-items: center; padding: 0 40px; text-transform: uppercase;
         }
-        .ticker-star { color: var(--orange); font-size: 1rem; margin-left: 30px; text-shadow: 0 0 10px var(--orange-glow); }
-        @keyframes scrollTicker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .ticker-star { color: var(--orange); font-size: 1.2rem; margin: 0 15px; }
 
-        /* ИСПРАВЛЕННЫЕ ЦИФРЫ ВНИЗУ 1 ЭКРАНА */
-        .glass-stats-wrapper { width: 100%; padding: 40px 8%; position: relative; z-index: 10; }
-        .liquid-glass-bar {
-            background: linear-gradient(135deg, rgba(20,20,20,0.8), rgba(10,10,10,0.9));
-            backdrop-filter: blur(30px); border: 1px solid var(--glass-border);
-            border-radius: var(--radius); display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 0 20px rgba(255,140,0,0.05); overflow: hidden;
+        @keyframes scrollTicker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
-        .stat-item { text-align: center; padding: 30px 20px; border-right: 1px solid rgba(255,140,0,0.1); }
-        .stat-item:last-child { border-right: none; }
-        .stat-val { font-family: 'Bebas Neue'; font-size: 3.5rem; color: var(--orange); display: block; line-height: 1; text-shadow: 0 0 20px var(--orange-glow); }
-        .stat-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: #aaa; margin-top: 10px; display: block; font-weight: 600; }
 
-        /* СЕКЦИЯ: ОБО МНЕ (WOW ЭФФЕКТ) */
-        .about-section { padding: 100px 8%; position: relative; z-index: 2; }
-        .about-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; align-items: center; }
+        /* ЦИФРЫ - ИСПРАВЛЕН ШРИФТ */
+        .stat-item { text-align: center; padding: 30px 20px; }
+        .stat-val { font-family: 'Bebas Neue'; font-size: 4rem; color: var(--orange); line-height: 0.9; }
+        .stat-label { font-family: 'Bebas Neue'; font-size: 1.2rem; color: #aaa; margin-top: 5px; display: block; letter-spacing: 1px; }
+
+        /* GLITCH EFFECT - ВТОРАЯ СТРАНИЦА */
+        .glitch-section { min-height: 80vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 8%; }
+        .glitch-text {
+            font-family: 'Bebas Neue'; font-size: clamp(3rem, 10vw, 8rem);
+            line-height: 0.9; color: var(--ivory); position: relative;
+        }
         
-        .video-text-mask {
-            font-family: 'Bebas Neue'; font-size: clamp(4rem, 7vw, 6rem); line-height: 0.9; margin-bottom: 20px;
-            /* WOW-эффект: Видео внутри текста */
-            background: url('https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif') center/cover;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            color: transparent;
-            text-shadow: 0px 0px 20px rgba(255, 140, 0, 0.2);
+        /* Анимация Глитча */
+        .glitch-text::before, .glitch-text::after {
+            content: "Я НЕ РЕЖУ КАДРЫ. Я СОЗДАЮ ЭМОЦИИ.";
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg);
+        }
+        .glitch-text::before { left: 2px; text-shadow: -2px 0 #ff00c1; clip: rect(44px, 450px, 56px, 0); animation: glitch-1 5s infinite linear alternate-reverse; }
+        .glitch-text::after { left: -2px; text-shadow: -2px 0 #00fff9; clip: rect(44px, 450px, 56px, 0); animation: glitch-2 5s infinite linear alternate-reverse; }
+
+        @keyframes glitch-1 {
+            0% { clip: rect(20px, 9999px, 21px, 0); }
+            5% { clip: rect(80px, 9999px, 90px, 0); }
+            10% { clip: rect(10px, 9999px, 30px, 0); }
+            15% { clip: rect(0, 0, 0, 0); } /* Пауза глитча */
+            100% { clip: rect(0, 0, 0, 0); }
+        }
+        @keyframes glitch-2 {
+            0% { clip: rect(40px, 9999px, 42px, 0); }
+            5% { clip: rect(10px, 9999px, 15px, 0); }
+            10% { clip: rect(60px, 9999px, 70px, 0); }
+            15% { clip: rect(0, 0, 0, 0); }
+            100% { clip: rect(0, 0, 0, 0); }
         }
 
-        .about-desc { font-size: 1.1rem; color: #aaa; line-height: 1.7; margin-bottom: 30px; }
-        
-        .id-card {
-            background: rgba(15, 15, 15, 0.8); border: 1px solid var(--orange); border-radius: var(--radius);
-            padding: 30px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.6), inset 0 0 30px rgba(255,140,0,0.05);
-            transform: perspective(1000px) rotateY(-5deg); transition: 0.5s;
+        /* ПРОЦЕСС РАБОТЫ - 4 СТРАНИЦА */
+        .process-section { padding: 100px 8%; }
+        .process-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 60px;
         }
-        .id-card:hover { transform: perspective(1000px) rotateY(0deg) translateY(-10px); box-shadow: 0 30px 60px rgba(255,140,0,0.2); }
-        .id-photo { width: 100%; aspect-ratio: 1/1; background: url('https://images.unsplash.com/photo-1574169208507-84376144848b?q=80&w=2079&auto=format&fit=crop') center/cover; border-radius: 16px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1); filter: grayscale(100%) contrast(1.2); transition: 0.5s; }
-        .id-card:hover .id-photo { filter: grayscale(0%); }
-        .id-name { font-family: 'Bebas Neue'; font-size: 2rem; color: #fff; letter-spacing: 1px; }
-        .id-role { color: var(--orange); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; }
-
-        /* СЕКЦИЯ: АРСЕНАЛ (ТОЛЬКО ОРАНЖЕВЫЙ) */
-        .bento-section { padding: 50px 8% 120px 8%; position: relative; z-index: 2; }
-        .section-title { font-family: 'Bebas Neue'; font-size: 4rem; text-align: center; margin-bottom: 60px; letter-spacing: 2px; }
-        .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
-        .bento-card {
-            background: var(--glass-bg); backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius);
-            padding: 35px; position: relative; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.4); transition: 0.4s;
+        .process-card {
+            background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: var(--radius);
+            padding: 40px; position: relative; overflow: hidden; transition: 0.4s;
         }
-        .bento-card:hover { transform: translateY(-5px); border-color: rgba(255, 140, 0, 0.4); }
-        .bento-card::before {
-            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: radial-gradient(circle at 50% 0%, var(--orange-glow), transparent 60%);
-            pointer-events: none; opacity: 0.3; transition: 0.4s;
+        .process-card:hover { border-color: var(--orange); transform: translateY(-10px); background: rgba(255, 140, 0, 0.03); }
+        .step-num {
+            font-family: 'Bebas Neue'; font-size: 5rem; color: rgba(255, 140, 0, 0.1);
+            position: absolute; top: -10px; right: 10px;
         }
-        .bento-card:hover::before { opacity: 0.7; }
-        .card-large { grid-column: span 2; }
-        .card-icon { width: 45px; height: 45px; background: rgba(255,140,0,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; font-size: 1.5rem; border: 1px solid rgba(255,140,0,0.3); color: var(--orange); }
-        .bento-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 15px; color: #fff; }
-        .bento-text { font-size: 0.9rem; color: #aaa; line-height: 1.6; }
+        .process-card h3 { font-family: 'Bebas Neue'; font-size: 1.8rem; color: var(--orange); margin-bottom: 15px; }
+        .process-card p { font-size: 0.95rem; color: #ccc; line-height: 1.6; margin: 0; }
 
-        /* Анимированный Прогресс Бар */
-        .ui-element { margin-top: 25px; background: rgba(0,0,0,0.5); border-radius: 12px; padding: 20px; border: 1px solid rgba(255,255,255,0.05); }
-        .ui-bar { height: 10px; background: #222; border-radius: 5px; overflow: hidden; margin-top: 10px; }
-        .ui-progress { width: 0%; height: 100%; background: linear-gradient(90deg, #CC7000, var(--orange)); box-shadow: 0 0 15px var(--orange-glow); transition: width 2s cubic-bezier(0.22, 1, 0.36, 1); }
-        .bento-card:hover .ui-progress, .aos-animate .ui-progress { width: 85%; } /* Анимация заполнения */
-
-        .tag-wrap { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
-        .ui-tag { padding: 8px 14px; background: rgba(255,140,0,0.05); border: 1px solid rgba(255,140,0,0.2); border-radius: 8px; font-size: 0.7rem; font-weight: 700; color: #ccc; text-transform: uppercase; transition: 0.3s; }
-        .ui-tag:hover { border-color: var(--orange); color: var(--orange); background: rgba(255,140,0,0.15); }
-
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
-
-        @media (max-width: 1024px) {
-            .hero, .about-grid { grid-template-columns: 1fr; text-align: center; }
-            .offer-text { margin: 0 auto 40px auto; border-left: none; border-bottom: 2px solid var(--orange); padding: 0 0 20px 0; }
-            .bento-grid { grid-template-columns: 1fr; }
-            .card-large { grid-column: span 1; }
-        }
     </style>
 </head>
 <body>
 
 <div id="cursor"></div>
-<div id="particles-js"></div>
 
-<header data-aos="fade-down">
+<header>
     <a href="#" class="logo">BABAN_OFF</a>
-    <nav class="hide-mobile">
-        <a href="#">Showreel</a>
-        <a href="#about">Обо мне</a>
-        <a href="#expertise">Экспертиза</a>
+    <nav>
+        <a href="#about" style="color:#aaa; text-decoration:none; margin: 0 15px; font-size: 0.8rem; font-weight:700;">О ПРОЦЕССЕ</a>
+        <a href="#" class="btn-premium" style="padding: 10px 20px; font-size: 1rem;">BRING THE FIRE</a>
     </nav>
-    <a href="#" class="btn-premium btn-solid" style="font-size: 1rem; padding: 10px 25px;">Связаться</a>
 </header>
 
 <main class="hero">
     <div class="hero-left">
-        <h1 data-aos="fade-right">
-            ВАШ КОНТЕНТ — <br>ЭТО ВАША <span class="highlight">ВАЛЮТА</span>
-        </h1>
-        <p class="offer-text" data-aos="fade-right" data-aos-delay="200">
-            Создаю визуальное превосходство для тех, кто ценит эстетику. Мой монтаж — это ритм и цвет, которые конвертируют зрителя в клиента.
-        </p>
+        <h1 data-aos="fade-right">ВАШ КОНТЕНТ — <br>ЭТО ВАША <span class="highlight">ВАЛЮТА</span></h1>
         <div data-aos="fade-up" data-aos-delay="400">
-            <a href="#" class="btn-premium btn-solid">Обсудить проект</a>
+            <a href="#" class="btn-premium">НАЧАТЬ ПРОЕКТ</a>
         </div>
     </div>
-
-    <div class="hero-right" data-aos="zoom-in" data-aos-delay="500">
-        <div class="main-frame">
-            <video autoplay loop muted playsinline class="hero-video">
-                <source src="https://assets.mixkit.co/videos/preview/mixkit-video-editor-working-on-a-project-at-night-42867-large.mp4" type="video/mp4">
-            </video>
-            
-            <div class="model-3d-placeholder">
-                <div class="cube-face front">3D</div>
-                <div class="cube-face back">EDIT</div>
-                <div class="cube-face right">VFX</div>
-                <div class="cube-face left">COLOR</div>
-                <div class="cube-face top"></div>
-                <div class="cube-face bottom"></div>
-            </div>
-
-            <div class="soft-badge ae">Ae</div>
-            <div class="soft-badge pr">Pr</div>
-        </div>
+    <div class="hero-right" data-aos="zoom-in">
+        <div style="width:100%; height:400px; background: #111; border-radius: 24px; border: 1px solid var(--glass-border); box-shadow: 0 0 50px var(--orange-glow);"></div>
     </div>
 </main>
 
 <div class="ticker-wrapper">
     <div class="ticker-track">
-        <div class="ticker-item">MOTION DESIGN <span class="ticker-star">✦</span> COLOR GRADING <span class="ticker-star">✦</span> REELS <span class="ticker-star">✦</span> SHORTS <span class="ticker-star">✦</span> YOUTUBE <span class="ticker-star">✦</span></div>
-        <div class="ticker-item">MOTION DESIGN <span class="ticker-star">✦</span> COLOR GRADING <span class="ticker-star">✦</span> REELS <span class="ticker-star">✦</span> SHORTS <span class="ticker-star">✦</span> YOUTUBE <span class="ticker-star">✦</span></div>
-        <div class="ticker-item">MOTION DESIGN <span class="ticker-star">✦</span> COLOR GRADING <span class="ticker-star">✦</span> REELS <span class="ticker-star">✦</span> SHORTS <span class="ticker-star">✦</span> YOUTUBE <span class="ticker-star">✦</span></div>
+        <div class="ticker-item">MOTION DESIGN <span class="ticker-star">✦</span> COLOR GRADING <span class="ticker-star">✦</span> PREMIUM EDIT <span class="ticker-star">✦</span> VFX <span class="ticker-star">✦</span> HIGH-END VERTICALS</div>
+        <div class="ticker-item">MOTION DESIGN <span class="ticker-star">✦</span> COLOR GRADING <span class="ticker-star">✦</span> PREMIUM EDIT <span class="ticker-star">✦</span> VFX <span class="ticker-star">✦</span> HIGH-END VERTICALS</div>
+        <div class="ticker-item">MOTION DESIGN <span class="ticker-star">✦</span> COLOR GRADING <span class="ticker-star">✦</span> PREMIUM EDIT <span class="ticker-star">✦</span> VFX <span class="ticker-star">✦</span> HIGH-END VERTICALS</div>
     </div>
 </div>
 
-<div class="glass-stats-wrapper" data-aos="fade-up">
-    <div class="liquid-glass-bar">
+<div class="process-section" style="padding: 40px 8%;">
+    <div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
         <div class="stat-item">
             <span class="stat-val">5 ЛЕТ</span>
-            <span class="stat-label">В индустрии</span>
+            <span class="stat-label">ОПЫТА</span>
         </div>
         <div class="stat-item">
-            <span class="stat-val">200+</span>
-            <span class="stat-label">Успешных проектов</span>
+            <span class="stat-val">250+</span>
+            <span class="stat-label">КЕЙСОВ</span>
         </div>
         <div class="stat-item">
-            <span class="stat-val">S-LOG3</span>
-            <span class="stat-label">Киношный цвет</span>
-        </div>
-        <div class="stat-item">
-            <span class="stat-val">MAX</span>
-            <span class="stat-label">Удержание зрителя</span>
+            <span class="stat-val">100%</span>
+            <span class="stat-label">КАЧЕСТВО</span>
         </div>
     </div>
 </div>
 
-<section class="about-section" id="about">
-    <div class="about-grid">
-        <div class="about-info" data-aos="fade-right">
-            <h2 class="video-text-mask">Я НЕ РЕЖУ КАДРЫ.<br>Я СОЗДАЮ ЭМОЦИИ.</h2>
-            <p class="about-desc">
-                Монтаж — это психология. Я анализирую паттерны восприятия, чтобы зритель не смог оторваться от экрана. Я не использую шаблоны. Каждый проект — это кастомный саунд-дизайн, выверенная цветокоррекция и идеальный ритм, работающий на ваш личный бренд.
-            </p>
-            <a href="#" class="btn-premium btn-solid" style="padding: 12px 30px; font-size: 1.2rem;">Мой Showreel</a>
+<section class="glitch-section">
+    <h2 class="glitch-text" data-text="Я НЕ РЕЖУ КАДРЫ. Я СОЗДАЮ ЭМОЦИИ.">Я НЕ РЕЖУ КАДРЫ. <br> Я СОЗДАЮ ЭМОЦИИ.</h2>
+</section>
+
+<section class="process-section" id="about">
+    <h2 style="font-family:'Bebas Neue'; font-size: 4rem; text-align:center;">КАК МЫ <span class="highlight">РАБОТАЕМ</span></h2>
+    <div class="process-grid">
+        <div class="process-card" data-aos="fade-up">
+            <div class="step-num">01</div>
+            <h3>АНАЛИЗ & БРИФ</h3>
+            <p>Погружаюсь в смыслы вашего бренда. Разбираем референсы, цели и целевую аудиторию, чтобы ролик бил точно в цель.</p>
         </div>
-        
-        <div class="about-visual" data-aos="fade-left">
-            <div class="id-card">
-                <div class="id-photo"></div>
-                <div class="id-name">BABAN_OFF</div>
-                <div class="id-role">Director of Editing & Motion</div>
-            </div>
+        <div class="process-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="step-num">02</div>
+            <h3>МОНТАЖ & РИТМ</h3>
+            <p>Создаю динамичный скелет видео. Работаю с психологией внимания — зритель не нажмет «пропустить».</p>
+        </div>
+        <div class="process-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="step-num">03</div>
+            <h3>VFX & ГРАФИКА</h3>
+            <p>Добавляю «дороговизны»: motion-элементы, саунд-дизайн и сложные переходы, которые выделяют вас на фоне конкурентов.</p>
+        </div>
+        <div class="process-card" data-aos="fade-up" data-aos-delay="300">
+            <div class="step-num">04</div>
+            <h3>ЦВЕТ & ФИНАЛ</h3>
+            <p>Киношный Color Grade (S-Log3). Финализируем картинку до идеального состояния и отдаем готовый шедевр.</p>
         </div>
     </div>
 </section>
 
-<section class="bento-section" id="expertise">
-    <h2 class="section-title" data-aos="fade-up">АРСЕНАЛ <span class="highlight">РЕШЕНИЙ</span></h2>
-    
-    <div class="bento-grid">
-        <div class="bento-card card-large" data-aos="fade-up" data-aos-delay="100">
-            <div class="card-icon">🔥</div>
-            <h3 class="bento-title">Алгоритмическое удержание (Retention)</h3>
-            <p class="bento-text">Динамика, саунд-дизайн и визуальные хуки выстраиваются так, чтобы зритель досмотрел ролик до конца. Высокий Retention = попадание в рекомендации.</p>
-            <div class="ui-element">
-                <div style="display: flex; justify-content: space-between; font-size: 0.9rem; font-weight: 700; color: #fff;">
-                    <span>Зрительское внимание (Удержание)</span>
-                    <span style="color: var(--orange);">85%</span>
-                </div>
-                <div class="ui-bar"><div class="ui-progress"></div></div>
-            </div>
-        </div>
-
-        <div class="bento-card" data-aos="fade-up" data-aos-delay="200">
-            <div class="card-icon">🎬</div>
-            <h3 class="bento-title">Cinematic Color Grade</h3>
-            <p class="bento-text">Вытягиваю максимум из исходников. Работаю с логарифмическими профилями (RAW, S-Log). Картинка выглядит дорого и стильно.</p>
-            <div class="tag-wrap">
-                <span class="ui-tag">S-Log3</span>
-                <span class="ui-tag">Rec.709</span>
-            </div>
-        </div>
-
-        <div class="bento-card" data-aos="fade-up" data-aos-delay="300">
-            <div class="card-icon">⚡</div>
-            <h3 class="bento-title">Motion Design</h3>
-            <p class="bento-text">Интеграция сложной графики и трекинга. Делаем сложную информацию залипательной.</p>
-            <div class="tag-wrap">
-                <span class="ui-tag">After Effects</span>
-                <span class="ui-tag">VFX</span>
-            </div>
-        </div>
-
-        <div class="bento-card card-large" data-aos="fade-up" data-aos-delay="400">
-            <div class="card-icon">🏆</div>
-            <h3 class="bento-title">Премиальный Workflow</h3>
-            <p class="bento-text">Соблюдение дедлайнов без компромиссов в качестве. Полный цикл от сырого материала до финального рендера.</p>
-        </div>
-    </div>
-</section>
-
-<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 <script>
-    AOS.init({ duration: 1000, once: true, offset: 100 });
+    AOS.init({ duration: 1000, once: true });
 
     const cursor = document.getElementById('cursor');
     document.addEventListener('mousemove', e => {
         cursor.style.transform = `translate(${e.clientX - 7}px, ${e.clientY - 7}px)`;
-    });
-
-    particlesJS('particles-js', {
-        "particles": {
-            "number": { "value": 50, "density": { "enable": true, "value_area": 800 } },
-            "color": { "value": "#FF8C00" },
-            "opacity": { "value": 0.2, "random": true },
-            "size": { "value": 2, "random": true },
-            "line_linked": { "enable": false },
-            "move": { "enable": true, "speed": 1, "direction": "top", "random": true, "out_mode": "out" }
-        }
-    });
-
-    // Скрипт для запуска анимации прогресс-бара, когда он появляется на экране
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.querySelector('.ui-progress').style.width = '85%';
-            }
-        });
-    }, { threshold: 0.5 });
-
-    document.querySelectorAll('.bento-card.card-large').forEach(card => {
-        if(card.querySelector('.ui-progress')) {
-            observer.observe(card);
-        }
     });
 </script>
 
